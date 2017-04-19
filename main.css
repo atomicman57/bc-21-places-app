@@ -1,5 +1,6 @@
 a{
 	text-decoration: none;
+    padding-left: 2em;
 }
 .header{
 
@@ -24,6 +25,7 @@ h4{
 .searchbar{
 	height: 38px;
 	width: 650px;
+    border-style: groove;
     font-weight: 500;
     font-size: 16px;
     padding-left: 44px;
@@ -35,6 +37,7 @@ h4{
     width: 130px;
     font-size: 16px;
     font-weight: 500;
+    border-style: groove;
     background-color: 14ACF2;
 }
 .input{

@@ -12,48 +12,14 @@
 	<section>
 		<h2>Discover great destinations around the world</h2>
 		<h4>Search through your Points of Interest</h4>
-		<input class="searchbar" type="text" placeholder="Enter Location">
-		<input class="search" type="submit" value="Search">
+		<input class="searchbar" id = "entry" type="text" placeholder="Enter Location">
+		<input class="search" type="submit" value="Search"onclick= 'initialize()'>
 	</section>
-
-
-
-
-
-<div id="message"></div>
-<script type="text/javascript">
-var myId = "AIzaSyA7F8g0ub6mdivvG6rMymuSYjAHyh6qBrU"
-
-
-function sendRequest(url) {
-	var xmlhttp = new XMLHttpRequest();
-	xmlhttp.onreadystatechange = function () {
-		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-			var data = JSON.parse(xmlhttp.responseText);
-			console.log(data);
-		}
-	};
-	xmlhttp.open("GET", url, true);
-	xmlhttp.send();
-}
-
-function updateByName() {
-	var url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?" + 
-				"type=restaurant" + "&key=" + myId;
-	sendRequest(url);
-}
-console.log(updateByName(url))
-
-
-
-
-</script>
-
-
-
-
-
-
+<div id="map">
+	
+</div>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7F8g0ub6mdivvG6rMymuSYjAHyh6qBrU&libraries=places"></script>
+<script type="text/javascript" src = "places.js"></script>
 
 </body>
 
