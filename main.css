@@ -1,0 +1,50 @@
+a{
+	text-decoration: none;
+}
+.header{
+
+}
+section {
+	text-align: center;
+}
+h1{
+	font-family: "Arial Black", Gadget, sans-serif;
+}
+h2{
+	font-size: 32px;
+    padding-top: 80px;
+    font-family: cursive;
+}
+h4{
+	font-family: monospace;
+    font-size: 25px;
+    margin-top: -25px;
+    margin-bottom: 10px;
+}
+.searchbar{
+	height: 38px;
+	width: 650px;
+    font-weight: 500;
+    font-size: 16px;
+    padding-left: 44px;
+    background-image: url(img/search.png);
+    background-repeat: no-repeat;
+}
+.search{
+	height: 38px;
+    width: 130px;
+    font-size: 16px;
+    font-weight: 500;
+    background-color: 14ACF2;
+}
+.input{
+	text-align: left;
+	font-size: 30px;
+    font-family: cursive;
+}
+.sort_list{
+	text-align: left;
+}
+.submit{
+	background-color: 14ACF2;
+}
