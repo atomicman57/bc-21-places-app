@@ -2,19 +2,36 @@
 <head>
 	<title>Places</title>
 	<link rel="stylesheet" type="text/css" href="main.css">
+	<script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css?family=Courgette|Roboto|Lato|Open+sans|Lobster|Passion+One" rel="stylesheet">
 </head>
 <body>
 	<header>
 		<div>
-			<h1><a href="result.html">9JAPLACES</a></h1>
+			<h1>9JAPLACES</h1>
+			<a href="javascript:getBrowserLocation()" class="near" >Click to get places nearby</a>
+			<!--<a href="" class="near1">View your favorite places</a>-->
 		</div>
 	</header>
-	<section>
-		<h2>Discover great destinations around the world</h2>
 		<h4>Search through your Points of Interest</h4>
-		<input class="searchbar" id = "entry" type="text" placeholder="Enter Location">
-		<input class="search" type="submit" value="Search"onclick= 'initialize()'>
-	</section>
+	<form class="form1">
+		<input class="searchbar" id = "entry" type="text" placeholder="Enter Location" required>
+		<p>Search place by:
+		 	<input  name="category" type="radio" value="establishment" checked>Establishments
+		 	<input  name="category" type="radio" value="point_of_interest">Points of Interest
+		 	<input  name="category" type="radio" value="restaurant" >Restaurants
+		 	<input  name="category" type="radio" value="hospital" >Hospitals
+		 	<input name="category"  type="radio" value="bank" >Banks
+		</p>
+		<input class="search" type="submit" value="Search">
+	</form>
+	
+
+<div id="result">
+</div>
 <div id="map">
 	
 </div>
