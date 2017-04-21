@@ -96,18 +96,18 @@ body {
 }
 
 .card--small {
-    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2);
-    margin-top: 30px;
-    margin-left: 300px;
+    box-shadow: 20px 14px 10px 0 rgba(0, 0, 0, 0.3), 2px 1px 4px 20px rgba(0, 0, 0, 0.2);
+    margin-top: 60px;
+    margin-left: 322px;
     height: 120px;
     min-height: 120px;
-    width: 700px;
+    width: 670px;
     background: white;
 }
 .card--small .card__image {
+  left: 50px;
   width: 125px;
   border-radius: 1px 0 0 1px;
-  left: 0;
   top: 0;
   opacity: 1;
   max-height: 136px;
@@ -117,8 +117,8 @@ body {
 }
 .card--small .card__title {
   color: #000;
-  left: 90px;
-  top: 8px;
+  left: 155px;
+  top: 14px;
 }
 .card--small .card__subtitle {
   opacity: 1;
@@ -129,6 +129,6 @@ body {
   opacity: 0;
 }
 .card--small .card__action-bar {
-  left: 88px;
-  margin-left: 37px;
+  left: 150px;
+  margin-left: 44px;
 }

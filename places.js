@@ -1,5 +1,4 @@
-// *****************************************************
-// Function to get user's current longitude and Latitude
+// Get user's current longitude and Latitude
 var lat
 var lon
 function getBrowserLocation() {
@@ -17,8 +16,7 @@ function getBrowserLocation() {
   navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
 };
 
-// ************************************
-// Function to Autocomplete User search
+// Autocomplete User search
 function search() {
   var address = (document.getElementById('entry'));
   var autocomplete = new google.maps.places.Autocomplete(address);
@@ -40,8 +38,7 @@ function search() {
 }
 search()
 
-// ***************************************************************************************
-// Function to Search based on places entered by the user or selected through autocomplete
+// Search based autocomplete/user entry
 var map;
 var service;
 var infowindow;
@@ -66,37 +63,49 @@ function initialize(e) {
 }
 
 function callback(results, status) {
-  // get the result div from html
-  var $resultDiv = $('#result');
+  var $resultDiv = $('#result');  // get the result div from html
   $resultDiv.empty();
   if (status == google.maps.places.PlacesServiceStatus.OK) {
     for (var i = 0; i < results.length; i++) {
       var $container = $('<div class="card card--small">');
       var $name = $('<h2 class="card__title">');
       var $pic = $('<div class="card__image">');
+      var $id = $('<div class="card__id">')
       var $address = $('<div class="card__action-bar">');
       var $fav = $('<button type="button" class="favorite fa fa-star">');
       var place = results[i];
-      console.log(place);
-
       
       $name.append(place.name);
       var imgUrl = place.photos && place.photos.length ? place.photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100}) : place.icon;
       $pic.css('background-image', 'url(' + imgUrl + ')')
-      $pic.attr('url', imgUrl)
+      $pic.attr('url', imgUrl);
+      $id.css('display', 'none')
+      $id.append(place.place_id);
       $address.append(place.formatted_address);
+      var available = place.name;
+      console.log(status)
 
-      $fav.appendTo($container)
+      $id.appendTo($container);
+      $fav.appendTo($container);
       $name.appendTo($container);
       $pic.appendTo($container);
       $address.appendTo($container);
       $container.appendTo($resultDiv);
     }
   }
+  else{
+    var $resultDiv = $('#result');  // get the result div from html
+    $resultDiv.empty();
+    var $container = $('<div class="card card--small">');
+    var $name = $('<h2 class="card__title">');
+
+    $name.append('No Results Found');
+    $name.appendTo($container);
+    $container.appendTo($resultDiv);
+  }
 }
 
-// ********************************
-// Function to search places nearby
+// Search  with current location
 var map;
 var service;
 var infowindow;
@@ -146,11 +155,22 @@ function call(results, status) {
       $container.appendTo($resultDiv);
     }
   }
+  else{
+    var $resultDiv = $('#result');  // get the result div from html
+    $resultDiv.empty();
+    var $container = $('<div class="card card--small">');
+    var $name = $('<h2 class="card__title">');
+
+    $name.append('No Results Found');
+    $name.appendTo($container);
+    $container.appendTo($resultDiv);
+  }
 }
+
+// Run initialize on submitting form
 $('.form1').submit(initialize);
 
-// *******************************************************************************************
-// Run getbrowser location on checking checkbox and hide submit button for initialize function
+// Run getbrowser location on checking checkbox
 $('#check').on('change', function () {
   if ($(this).is(':checked')){
     $("#entry").attr('disabled','disabled');
@@ -165,34 +185,60 @@ $('#check').on('change', function () {
   }
 });
 
-// **********************************
 // Hide submit button for function nearest
 $(document).ready(function() {
   $(".search2").hide();
 });
-
 
 // Hide search nearby button for function nearest
 $(function(){
   $("#search2").hide();
 })
 
-// **********************************
 // Get favorite data
 $("#result").on('click', "button.favorite", function(){
   var k = $(this).parent()
   var a = k.find('.card__title').text();
   var b = k.find('.card__action-bar').text();
   var c = k.find('.card__image').attr('url');
-  var obj = {name:a, address:b, imgUrl:c};
-  console.log(obj);
+  var d = k.find('.card__id').text();
+  $(this).toggleClass('clicked');
+  var obj = {name:a, address:b, imgUrl:c, id:d};
+  localStorage.setItem(obj.id, JSON.stringify(obj));  // Save to local storage
 });
 
-// **********************************
-// Save to local storage
-if (typeof(Storage) !== "undefined") {
-  localStorage.setItem("name", "Smith");
-} else {
-    
+// Get from local storage
+function get() {
+  var $resultDiv = $('#result');
+  $resultDiv.empty();
+  for (var i = 0; i < localStorage.length; i++) {
+    var ide = localStorage.key(i)
+    var obj = JSON.parse(localStorage.getItem(ide));
+    var $container = $('<div class="card card--small">');
+    var $name = $('<h2 class="card__title">');
+    var $pic = $('<div class="card__image">');
+    var $img = $('<img>');
+    var $address = $('<div class="card__action-bar">');
+
+    $name.append(obj.name);
+    var imgUrl = obj.imgUrl;
+    $pic.css('background-image', 'url(' + imgUrl + ')')
+    $address.append(obj.address);
+
+    $name.appendTo($container);
+    $pic.appendTo($container);
+    $address.appendTo($container);
+    $container.appendTo($resultDiv);
+
+  }
 }
+
+// Click favorites to run get function
+$('#favd').on('click', get());
+
+
+
+
+
+
   
