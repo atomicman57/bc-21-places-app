@@ -1,10 +1,10 @@
+// *****************************************************
 // Function to get user's current longitude and Latitude
 var lat
 var lon
 function getBrowserLocation() {
-  var startPos;
   var geoOptions = {
-     timeout: 10 * 1000
+    timeout: 10 * 1000
   }
   var geoSuccess = function(position) {
     startPos = position;
@@ -13,15 +13,11 @@ function getBrowserLocation() {
   };
   var geoError = function(error) {
     console.log('Error occurred. Error code: ' + error.code);
-    // error.code can be:
-    //   0: unknown error
-    //   1: permission denied
-    //   2: position unavailable (error response from location provider)
-    //   3: timed out
   };
   navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
 };
 
+// ************************************
 // Function to Autocomplete User search
 function search() {
   var address = (document.getElementById('entry'));
@@ -44,11 +40,11 @@ function search() {
 }
 search()
 
-// Function to Search based on places entered by the user
+// ***************************************************************************************
+// Function to Search based on places entered by the user or selected through autocomplete
 var map;
 var service;
 var infowindow;
-
 function initialize(e) {
   e.preventDefault();
   var entry = document.getElementById('entry').value
@@ -70,24 +66,27 @@ function initialize(e) {
 }
 
 function callback(results, status) {
-  // get the result div
+  // get the result div from html
   var $resultDiv = $('#result');
   $resultDiv.empty();
-  // console.log(status);
   if (status == google.maps.places.PlacesServiceStatus.OK) {
     for (var i = 0; i < results.length; i++) {
-      var $container = $('<div class="out">');
-      var $name = $('<div class="name">');
-      var $pic = $('<div class="pics">');
-      var $img = $('<img>');
-      var $address = $('<div class="addr">');
+      var $container = $('<div class="card card--small">');
+      var $name = $('<h2 class="card__title">');
+      var $pic = $('<div class="card__image">');
+      var $address = $('<div class="card__action-bar">');
+      var $fav = $('<button type="button" class="favorite fa fa-star">');
       var place = results[i];
-      console.log(place)
+      console.log(place);
+
+      
       $name.append(place.name);
-      // $img.attr('src', place.photos ? place.photos[0].getUrl() : place.icon);
-      $pic.append($img);
+      var imgUrl = place.photos && place.photos.length ? place.photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100}) : place.icon;
+      $pic.css('background-image', 'url(' + imgUrl + ')')
+      $pic.attr('url', imgUrl)
       $address.append(place.formatted_address);
 
+      $fav.appendTo($container)
       $name.appendTo($container);
       $pic.appendTo($container);
       $address.appendTo($container);
@@ -96,11 +95,7 @@ function callback(results, status) {
   }
 }
 
-
-
-
-    
-
+// ********************************
 // Function to search places nearby
 var map;
 var service;
@@ -108,8 +103,7 @@ var infowindow;
 
 function nearest() {
   var pyrmont = new google.maps.LatLng(lat,lon);
-  console.log(lat)
-  console.log(lon)
+  var selected = $('input[name=category]:checked').val();
 
   map = new google.maps.Map(document.getElementById('map'), {
       center: pyrmont,
@@ -119,7 +113,7 @@ function nearest() {
   var request = {
     location: pyrmont,
     radius: '1000',
-    types: ['store', 'bar', 'food', 'church', 'school']
+    types: [selected]
   };
 
   service = new google.maps.places.PlacesService(map);
@@ -127,12 +121,78 @@ function nearest() {
 }
 
 function call(results, status) {
+  var $resultDiv = $('#result');
+  $resultDiv.empty();
   if (status == google.maps.places.PlacesServiceStatus.OK) {
     for (var i = 0; i < results.length; i++) {
+      var $container = $('<div class="card card--small">');
+      var $name = $('<h2 class="card__title">');
+      var $fav = $('<div class="favorite">');
+      var $pic = $('<div class="card__image">');
+      var $img = $('<img>');
+      var $address = $('<div class="card__action-bar">');
       var place = results[i];
       console.log(place)
+      $name.append(place.name);
+      var imgUrl = place.photos && place.photos.length ? place.photos[0].getUrl({'maxWidth': 100, 'maxHeight': 100}) : place.icon;
+      $pic.css('background-image', 'url(' + imgUrl + ')')
+      $fav.append("Hi")
+      $address.append(place.vicinity);
+
+      $fav.appendTo($container);
+      $name.appendTo($container);
+      $pic.appendTo($container);
+      $address.appendTo($container);
+      $container.appendTo($resultDiv);
     }
   }
 }
-
 $('.form1').submit(initialize);
+
+// *******************************************************************************************
+// Run getbrowser location on checking checkbox and hide submit button for initialize function
+$('#check').on('change', function () {
+  if ($(this).is(':checked')){
+    $("#entry").attr('disabled','disabled');
+    $("#search1").hide();
+    $("#search2").show();
+    getBrowserLocation();
+  }
+  else{
+    $("#entry").removeAttr('disabled');
+    $("#search1").show();
+    $("#search2").hide();
+  }
+});
+
+// **********************************
+// Hide submit button for function nearest
+$(document).ready(function() {
+  $(".search2").hide();
+});
+
+
+// Hide search nearby button for function nearest
+$(function(){
+  $("#search2").hide();
+})
+
+// **********************************
+// Get favorite data
+$("#result").on('click', "button.favorite", function(){
+  var k = $(this).parent()
+  var a = k.find('.card__title').text();
+  var b = k.find('.card__action-bar').text();
+  var c = k.find('.card__image').attr('url');
+  var obj = {name:a, address:b, imgUrl:c};
+  console.log(obj);
+});
+
+// **********************************
+// Save to local storage
+if (typeof(Storage) !== "undefined") {
+  localStorage.setItem("name", "Smith");
+} else {
+    
+}
+  

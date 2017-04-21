@@ -1,32 +1,39 @@
 <html>
 <head>
 	<title>Places</title>
+	<link rel="stylesheet" type="text/css" href="materialcard.css">
 	<link rel="stylesheet" type="text/css" href="main.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script
   src="https://code.jquery.com/jquery-3.2.1.js"
   integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
   crossorigin="anonymous"></script>
-  <link href="https://fonts.googleapis.com/css?family=Courgette|Roboto|Lato|Open+sans|Lobster|Passion+One" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Courgette|Roboto:400,700,300|Russo+One" rel="stylesheet">
 </head>
 <body>
 	<header>
-		<div>
-			<h1>9JAPLACES</h1>
-			<a href="javascript:getBrowserLocation()" class="near" >Click to get places nearby</a>
-			<!--<a href="" class="near1">View your favorite places</a>-->
-		</div>
+		<h1 class="logo">9jaPlaces</h1>
+		<span class="fav"><a href="">Favorites</a></span>
 	</header>
-		<h4>Search through your Points of Interest</h4>
+
+	<h4>Search through your Points of Interest</h4>
 	<form class="form1">
 		<input class="searchbar" id = "entry" type="text" placeholder="Enter Location" required>
-		<p>Search place by:
-		 	<input  name="category" type="radio" value="establishment" checked>Establishments
-		 	<input  name="category" type="radio" value="point_of_interest">Points of Interest
+		<p class ="nearby">
+			<span class="near">Use current location
+				<input  id="check"name="nearby" type="checkbox" value="nearby">
+			</span>
+		</p>
+		<p class="find">Search place by:
+		 	<input  name="category" type="radio" value="bar" checked>Bars
+		 	<input  name="category" type="radio" value="school">Schools
 		 	<input  name="category" type="radio" value="restaurant" >Restaurants
 		 	<input  name="category" type="radio" value="hospital" >Hospitals
 		 	<input name="category"  type="radio" value="bank" >Banks
+		 	<input name="category"  type="radio" value="store" >Departmental Stores
 		</p>
-		<input class="search" type="submit" value="Search">
+		<input class="search" type="submit" id="search1" value="Search">
+		<input class="search" type="submit" id="search2" value="Search by Location"onclick="nearest()">
 	</form>
 	
 
@@ -35,6 +42,7 @@
 <div id="map">
 	
 </div>
+
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7F8g0ub6mdivvG6rMymuSYjAHyh6qBrU&libraries=places"></script>
 <script type="text/javascript" src = "places.js"></script>
 
