@@ -180,7 +180,7 @@ function noResults () {
   var $resultDiv = $('#result');  // get the result div from html
   $resultDiv.empty();
   var $container = $('<div class="card card--small">');
-  var $name = $('<h2 class="card__title">');
+  var $name = $('<h2 class="card__title empty">');
 
   $name.append('No Results Found');
   $name.appendTo($container);

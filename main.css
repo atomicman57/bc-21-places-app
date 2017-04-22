@@ -84,7 +84,7 @@ h4 {
 .searchbar {
     height: 38px;
     width: 750px;
-    max-width: 100%;
+    max-width: 95%;
     border: 1px #ddd solid;
     font-weight: 500;
     font-size: 16px;
