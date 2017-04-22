@@ -13,6 +13,9 @@ header {
 }
 
 a {
+    color: yellowgreen;
+    text-decoration: none;
+    font-size: 20px;
 	text-decoration: none;
 }
 
@@ -61,13 +64,21 @@ h4 {
 }
 
 .favorite {
+    margin-left: 610px;
     border: none;
     width: 60px;
     height: 25px;
-    margin-left: 650px;
+    cursor: pointer;
+    background-color: white;
 }
-.favorite:hover{
-    background color: yellow;
+
+.favorite:hover, .favorite.clicked, .favorite:focus {
+    outline: none;
+    border: none;
+}
+
+.favorite:hover, .favorite.clicked {
+    color: yellow;
 }
 
 .searchbar {
@@ -114,27 +125,17 @@ h4 {
     margin-left: 330px;
 }
 
-.pics {
-    width: 120px;
-    height: 140px;
-    padding-left: 30px;
-    padding-top: 20px;
+#result {
+    margin-bottom: 30px;
 }
 
-.name {
-    margin-left: 140px;
-    position: absolute;
-    margin-top: 22px;
-    font-weight: bold;
-    width: 500px;
+.clear_all {
+    margin-left: 322px;
+    margin-bottom: -20px;
+    color: #57B773;
+    background-color: white;
+    border: 1px #57B773 solid;
+    padding: 5px;
+    cursor: pointer;
+
 }
-
-.addr {
-    position: relative;
-    height: 35px;
-    width: 503px;
-    margin-left: 140px;
-    top: -60px;
-}
-
-

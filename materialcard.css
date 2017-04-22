@@ -75,6 +75,7 @@ body {
   -webkit-transition: delay 0.1s;
   transition: delay 0.1s;
 }
+
 .card__action-bar {
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -98,37 +99,43 @@ body {
 .card--small {
     box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 2px 2px 0 rgba(0, 0, 0, 0.2);
     margin-top: 30px;
-    margin-left: 300px;
+    margin-left: 322px;
     height: 120px;
     min-height: 120px;
-    width: 700px;
+    width: 670px;
     background: white;
 }
+
 .card--small .card__image {
-  width: 125px;
+  left: 0px;
+  width: 160px;
   border-radius: 1px 0 0 1px;
-  left: 0;
   top: 0;
   opacity: 1;
   max-height: 136px;
 }
+
 .card--small .card__image:after {
   opacity: 0;
 }
+
 .card--small .card__title {
   color: #000;
-  left: 90px;
-  top: 8px;
+  left: 155px;
+  top: 14px;
 }
+
 .card--small .card__subtitle {
   opacity: 1;
   left: 88px;
 }
+
 .card--small .card__text {
   top: 30px;
   opacity: 0;
 }
+
 .card--small .card__action-bar {
-  left: 88px;
-  margin-left: 37px;
+  left: 150px;
+  margin-left: 44px;
 }
